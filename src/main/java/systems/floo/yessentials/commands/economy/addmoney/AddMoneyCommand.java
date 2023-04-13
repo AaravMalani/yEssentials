@@ -75,11 +75,10 @@ public class AddMoneyCommand extends Command {
             return true;
         }
 
-        if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player player)) {
             return false;
         }
 
-        Player player = (Player) sender;
         UUID uuid = player.getUniqueId();
 
         if (!EconomyProvider.isRegistered(uuid)){
