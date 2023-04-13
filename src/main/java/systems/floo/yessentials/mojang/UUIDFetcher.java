@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public class UUIDFetcher {
 
-    private static final String UUID_URL = "https://api.mojang.com/users/profiles/minecraft/%s?at=%d";
+    private static final String UUID_URL = "https://api.mojang.com/users/profiles/minecraft/%s";
     private static Gson gson = new GsonBuilder().registerTypeAdapter(UUID.class, new UUIDTypeAdapter()).create();
 
     private UUID id;
@@ -29,7 +29,7 @@ public class UUIDFetcher {
         name = name.toLowerCase();
 
         try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(String.format(UUID_URL, name, System.currentTimeMillis()/1000)).openConnection();
+            HttpURLConnection connection = (HttpURLConnection) new URL(String.format(UUID_URL, name)).openConnection();
             connection.setReadTimeout(5000);
             UUIDFetcher data = gson.fromJson(new BufferedReader(new InputStreamReader(connection.getInputStream())), UUIDFetcher.class);
 
